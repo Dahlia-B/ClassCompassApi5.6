@@ -1,0 +1,19 @@
+version: 1.0
+runtime: dotnet8
+build:
+  commands:
+    build:
+      - echo "Building ClassCompass API"
+      - dotnet restore ClassCompassApi.csproj
+      - dotnet publish ClassCompassApi.csproj -c Release -o /opt/app
+run:
+  runtime-version: '8.0'
+  command: dotnet ClassCompassApi.dll
+  network:
+    port: 8080
+    env: PORT
+  env:
+    - name: ASPNETCORE_ENVIRONMENT
+      value: Production
+    - name: ASPNETCORE_URLS
+      value: http://+:8080
